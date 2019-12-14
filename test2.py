@@ -1,5 +1,4 @@
 from infinite_MDP import MDP
-import numpy as np
 
 
 n_state, n_action, discount_factor = 7, 2, 0.99
