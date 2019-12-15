@@ -1,6 +1,7 @@
 import numpy as np
 import pulp as opt
 import random
+import utils_
 
 
 class RTPM(object):
@@ -314,3 +315,13 @@ class MCTPM(object):
             print(count)
 
         return ls_pn, ls_pc
+
+    def get_transition_probs(self):
+
+        pn, pc = self.get_samples()
+        pn = sum(pn) / self.sample_size
+        pc = sum(pc) / self.sample_size
+        utils_.mc_normalization(pn)
+        utils_.mc_normalization(pc)
+
+        return pn, pc
