@@ -38,11 +38,49 @@ public class Read {
 			for (int i = 0; iterator.hasNext(); i++) {
 				Row nextRow = iterator.next(); 
 				Iterator<Cell> cellIterator = nextRow.cellIterator(); // create cell
-				if(i>=1){
+				if(i>=0){
 					for (int j = 0; cellIterator.hasNext(); j++) { 
 						Cell cell = cellIterator.next();
-						if(j>=1){
-							distance[i-1][j-1]= cell.getNumericCellValue();
+						if(j>=0){
+							distance[i][j]= cell.getNumericCellValue();
+						}
+					}
+				}
+			}
+		}
+	 
+	 public void read_scenario_transition(double[][][] mc, int n_scenario) {
+		 for(int s=0;s<n_scenario;s++) {
+			 XSSFSheet sheet = (XSSFSheet) workbook.getSheetAt(s); // which sheet in excel
+				Iterator<Row> iterator = sheet.iterator(); // create row iterator
+				for (int i = 0; iterator.hasNext(); i++) {
+					Row nextRow = iterator.next(); 
+					Iterator<Cell> cellIterator = nextRow.cellIterator(); // create cell
+					if(i>=0){
+						for (int j = 0; cellIterator.hasNext(); j++) { 
+							Cell cell = cellIterator.next();
+							if(j>=0){
+								mc[i][j][s]= cell.getNumericCellValue();
+							}
+						}
+					}
+				}
+		 }
+	 }
+	 
+	 public void read_scenario_cost(double[][] cost, int n_scenario){
+			for(int s=0;s<n_scenario;s++) {
+				XSSFSheet sheet = (XSSFSheet) workbook.getSheetAt(s); // which sheet in excel
+				Iterator<Row> iterator = sheet.iterator(); // create row iterator
+				for (int i = 0; iterator.hasNext(); i++) {
+					Row nextRow = iterator.next(); 
+					Iterator<Cell> cellIterator = nextRow.cellIterator(); // create cell
+					if(i>=0){
+						for (int j = 0; cellIterator.hasNext(); j++) { 
+							Cell cell = cellIterator.next();
+							if(j==0){
+								cost[i][s]=cell.getNumericCellValue();
+							}
 						}
 					}
 				}

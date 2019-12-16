@@ -19,8 +19,8 @@ class MDP(object):
 
     def create_P(self):
 
-        mc_n = pd.read_csv('normal_care_transitions.csv', header=None)
-        mc_c = pd.read_csv('complex_care_transitions.csv', header=None)
+        mc_n = pd.read_excel('normal_care_transitions.xlsx', header=None)
+        mc_c = pd.read_excel('complex_care_transitions.xlsx', header=None)
 
         self.P[:, 0, :] = mc_n
         self.P[:, 1, :] = mc_c
@@ -37,7 +37,7 @@ class MDP(object):
                     [np.sum(self.P[state, action,:-1] * self.V[:]) + self.P[state, action, self.n_state - 1] *self.cost[-1]
                      for action in range(self.n_action)])
                 delta = max(delta, abs(self.V[state] - old_state_value))
-            if delta < 1e-6:
+            if delta < 1e-18:
                 break
             count += 1
             print('iteration number: '+ str(count))

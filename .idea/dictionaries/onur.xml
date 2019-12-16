@@ -4,6 +4,8 @@
       <w>coef</w>
       <w>mctpm</w>
       <w>probs</w>
+      <w>xlsx</w>
+      <w>xlsxwriter</w>
     </words>
   </dictionary>
 </component>
